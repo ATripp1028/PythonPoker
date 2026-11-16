@@ -3,10 +3,10 @@ from card import Card
 
 class Hand:
     def __init__(self) -> None:
-        self.cards = []
+        self.cards: list[Card] = []
 
     def __str__(self) -> str:
-        card_names = []
+        card_names: list[str] = []
         for card in self.cards:
             card_names.append(str(card))
         return ", ".join(card_names)
