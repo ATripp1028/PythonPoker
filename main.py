@@ -1,4 +1,3 @@
-import random
 from datetime import datetime
 
 from rich import print
@@ -7,9 +6,7 @@ from rich.live import Live
 from rich.panel import Panel
 from rich.table import Table
 
-from card import Card
-from constants import HAND_SIZE, RANKS, SUITS
-from hand import Hand
+from game import Game
 
 
 def make_layout():
@@ -18,10 +15,6 @@ def make_layout():
         Layout(name="header", size=3),
         Layout(name="main", ratio=1),
         Layout(name="footer", size=7),
-    )
-    layout["main"].split(
-        Layout(name="Dealer", ratio=1),
-        Layout(name="Player", ratio=1)
     )
 
     return layout
@@ -39,36 +32,19 @@ class Header:
         )
         return Panel(grid, style="black on red")
 
-def build_hands(player_hand, dealer_hand):
-    pass
-
-def deal_cards(deck: list[Card]):
-    your_hand = Hand()
-    dealer_hand = Hand()
-
-    for __i in range(0, HAND_SIZE):
-        your_hand.draw_card(deck.pop())
-        dealer_hand.draw_card(deck.pop())
-
-    return your_hand, dealer_hand
-
-
 def main():
     print("Welcome to PythonPoker!")
 
     layout = make_layout()
+    game = Game()
 
-    deck: list[Card] = []
+    deck = game.build_deck()
+    game.shuffle_deck()
 
-    for suit in SUITS:
-        for rank in RANKS:
-            deck.append(Card(rank, suit))
-
-    random.shuffle(deck)
-
-    your_hand, dealer_hand = deal_cards(deck)
+    your_hand, dealer_hand = game.deal_cards(deck)
 
     layout["header"].update(Header())
+    layout["main"].update(game)
 
     with Live(layout, refresh_per_second=10, screen=True):
         while True:
