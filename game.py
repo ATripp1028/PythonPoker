@@ -17,11 +17,11 @@ class Game(object):
     def __rich__(self):
         layout = Layout()
         layout.split(
-            Layout(self.dealer_hand, name="Dealer", ratio=1),
-            Layout(self.player_hand, name="Player", ratio=1)
+            Layout(Panel(self.dealer_hand), name="Dealer"),
+            Layout(Panel(self.player_hand), name="Player")
         )
 
-        return Panel(layout)
+        return layout
 
 
     def build_deck(self):
