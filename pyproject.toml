@@ -51,3 +51,4 @@ select = ["E", "F", "I"]
 venvPath = "."
 venv = ".venv"
 reportImplicitOverride = false
+reportUnusedCallResult = false

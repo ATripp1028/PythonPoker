@@ -17,8 +17,8 @@ class Game(object):
     def __rich__(self):
         layout = Layout()
         layout.split(
-            Layout(name="Dealer", ratio=1),
-            Layout(name="Player", ratio=1)
+            Layout(self.dealer_hand, name="Dealer", ratio=1),
+            Layout(self.player_hand, name="Player", ratio=1)
         )
 
         return Panel(layout)

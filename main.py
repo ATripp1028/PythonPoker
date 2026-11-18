@@ -41,7 +41,7 @@ def main():
     deck = game.build_deck()
     game.shuffle_deck()
 
-    your_hand, dealer_hand = game.deal_cards(deck)
+    game.deal_cards(deck)
 
     layout["header"].update(Header())
     layout["main"].update(game)

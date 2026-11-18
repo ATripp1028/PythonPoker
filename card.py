@@ -1,3 +1,4 @@
+from rich import box
 from rich.panel import Panel
 from rich.text import Text
 
@@ -16,8 +17,13 @@ class Card:
         suit_symbol = SUIT_GLYPHS[self.suit]
         color = f"bold {SUIT_PALETTES['classic'][self.suit]}"
         body = Text()
+        body.append(f"{self.get_short_rank()}   \n", style=color)
+        body.append(f"  {suit_symbol}  \n", style=color)
+        body.append(f"   {self.get_short_rank()}\n", style=color)
+        return Panel(body, box=box.ROUNDED, width=7, padding=0, style="on white",
+            border_style="grey50 on white")
 
-    def get_short_rep(self) -> str:
+    def get_short_rank(self) -> str:
         match (self.rank):
             case "Ace":
                 return "A"

@@ -1,5 +1,7 @@
-from rich.panel import Panel
-from rich.table import Table
+from rich.align import Align
+from rich.console import Group
+from rich.columns import Columns
+from rich.text import Text
 
 from card import Card
 
@@ -15,7 +17,11 @@ class Hand:
         return ", ".join(card_names)
 
     def __rich__(self):
-        pass
+        slots: list[Group] = []
+        for i in range(0, len(self.cards)):
+            label = Text(f"[{i + 1}]", "dim")
+            slots.append(Group(self.cards[i], Align.center(label, width=7)))
+        return Columns(slots, padding=(0,1))
 
     def draw_card(self, card: Card):
         self.cards.append(card)
