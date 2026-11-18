@@ -1,6 +1,6 @@
 from rich.align import Align
-from rich.console import Group
 from rich.columns import Columns
+from rich.console import Group
 from rich.text import Text
 
 from card import Card

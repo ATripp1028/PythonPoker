@@ -8,10 +8,10 @@ SUIT_GLYPHS = {
 }
 SUIT_PALETTES = {
     "classic": {
-        "Spades": "black",
+        "Spades": "white",
         "Hearts": "red3",
         "Diamonds": "red3",
-        "Clubs": "black"
+        "Clubs": "white"
     },
     "four_color": {
         "Spades": "black",

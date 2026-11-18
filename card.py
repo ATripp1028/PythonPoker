@@ -17,11 +17,12 @@ class Card:
         suit_symbol = SUIT_GLYPHS[self.suit]
         color = f"bold {SUIT_PALETTES['classic'][self.suit]}"
         body = Text()
-        body.append(f"{self.get_short_rank()}   \n", style=color)
-        body.append(f"  {suit_symbol}  \n", style=color)
-        body.append(f"   {self.get_short_rank()}\n", style=color)
-        return Panel(body, box=box.ROUNDED, width=7, padding=0, style="on white",
-            border_style="grey50 on white")
+        short_rank = self.get_short_rank()
+        body.append(f"{short_rank}\n\n", style=color)
+        body.append(f"  {suit_symbol}\n\n", style=color)
+        body.append(f"    {'' if short_rank == '10' else ' '}{short_rank}", style=color)
+        return Panel(body, box=box.ROUNDED, width=8, padding=0,
+            border_style="white")
 
     def get_short_rank(self) -> str:
         match (self.rank):
