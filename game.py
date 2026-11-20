@@ -13,6 +13,7 @@ class Game(object):
         self.deck: list[Card] = []
         self.dealer_hand: Hand = Hand()
         self.player_hand: Hand = Hand()
+        self.running: bool = True
 
     def __rich__(self):
         layout = Layout()
@@ -23,6 +24,8 @@ class Game(object):
 
         return layout
 
+    def handle_q_press(self):
+        self.running = False
 
     def build_deck(self):
         for suit in SUITS:
@@ -40,3 +43,11 @@ class Game(object):
             self.dealer_hand.draw_card(deck.pop())
 
         return self.player_hand, self.dealer_hand
+
+    def run_game_loop(self) -> bool:
+        return True
+
+    def run_game(self):
+        while self.running:
+            if not self.run_game_loop():
+                return

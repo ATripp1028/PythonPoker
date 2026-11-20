@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.15"
 dependencies = [
     "rich>=15.0.0",
+    "textual>=8.2.8",
 ]
 
 [dependency-groups]
