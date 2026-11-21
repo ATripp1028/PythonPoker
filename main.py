@@ -1,10 +1,8 @@
-from rich.layout import Layout
 from textual.app import App, ComposeResult
-from textual.widgets import Input, Static
+from textual.widgets import Footer, Header, Input, Static
 
 from constants import GameStage
 from game import Game
-from header import Header
 
 
 class PyPoker(App):
@@ -24,12 +22,9 @@ class PyPoker(App):
         self.game.deal_cards(deck)
 
     def compose(self) -> ComposeResult:
-        yield Static(Header(), id="header")
+        yield Header()
         yield Static(self.game, id="main")
-        yield Input(placeholder="Enter bet...", id="bet")
-
-    def on_mount(self):
-        self.set_interval(1, lambda: self.query_one("#header", Static).update(Header()))
+        yield Footer()
 
     def on_input_submitted(self, event: Input.Submitted):
         input = event.value
