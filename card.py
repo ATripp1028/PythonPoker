@@ -19,9 +19,9 @@ class Card:
         body = Text()
         short_rank = self.get_short_rank()
         body.append(f"{short_rank}\n\n", style=color)
-        body.append(f"  {suit_symbol}\n\n", style=color)
-        body.append(f"    {'' if short_rank == '10' else ' '}{short_rank}", style=color)
-        return Panel(body, box=box.ROUNDED, width=8, padding=0,
+        body.append(f"   {suit_symbol}\n\n", style=color)
+        body.append(f"     {'' if short_rank == '10' else ' '}{short_rank}", style=color)
+        return Panel(body, box=box.ROUNDED, width=9, padding=0,
             border_style="white")
 
     def get_short_rank(self) -> str:

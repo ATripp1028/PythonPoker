@@ -4,22 +4,24 @@ from rich.layout import Layout
 from rich.panel import Panel
 
 from card import Card
-from constants import HAND_SIZE, RANKS, SUITS
-from hand import Hand
+from constants import HAND_SIZE, RANKS, SUITS, GameStage
+from player import Player
 
 
 class Game(object):
     def __init__(self):
         self.deck: list[Card] = []
-        self.dealer_hand: Hand = Hand()
-        self.player_hand: Hand = Hand()
+        self.dealer: Player = Player()
+        self.player: Player = Player(True)
         self.running: bool = True
+        self.game_stage: GameStage = GameStage.BETTING_1
+        self.pot: int = 0
 
     def __rich__(self):
         layout = Layout()
         layout.split(
-            Layout(Panel(self.dealer_hand), name="Dealer"),
-            Layout(Panel(self.player_hand), name="Player")
+            Layout(Panel(self.dealer.hand), name="Dealer"),
+            Layout(Panel(self.player.hand), name="Player")
         )
 
         return layout
@@ -39,10 +41,10 @@ class Game(object):
 
     def deal_cards(self, deck: list[Card]):
         for _i in range(0, HAND_SIZE):
-            self.player_hand.draw_card(deck.pop())
-            self.dealer_hand.draw_card(deck.pop())
+            self.player.hand.draw_card(deck.pop())
+            self.dealer.hand.draw_card(deck.pop())
 
-        return self.player_hand, self.dealer_hand
+        return self.player.hand, self.dealer.hand
 
     def run_game_loop(self) -> bool:
         return True

@@ -1,36 +1,11 @@
-from datetime import datetime
-
 from rich.layout import Layout
-from rich.panel import Panel
-from rich.table import Table
 from textual.app import App, ComposeResult
 from textual.widgets import Input, Static
 
+from constants import GameStage
 from game import Game
+from header import Header
 
-
-def make_layout():
-    layout = Layout(name="root")
-    layout.split(
-        Layout(name="header", size=3),
-        Layout(name="main", ratio=1),
-        Layout(name="footer", size=7),
-    )
-
-    return layout
-
-class Header:
-    """Display header with clock."""
-
-    def __rich__(self) -> Panel:
-        grid = Table.grid(expand=True)
-        grid.add_column(justify="center", ratio=1)
-        grid.add_column(justify="right")
-        grid.add_row(
-            "[b]PyPoker[/b]",
-            datetime.now().ctime().replace(":", "[blink]:[/]"),
-        )
-        return Panel(grid, style="black on red")
 
 class PyPoker(App):
     CSS = """
@@ -57,7 +32,12 @@ class PyPoker(App):
         self.set_interval(1, lambda: self.query_one("#header", Static).update(Header()))
 
     def on_input_submitted(self, event: Input.Submitted):
-        bet = event.value
+        input = event.value
+
+        if self.game.game_stage == GameStage.BETTING_1:
+            bet = int(input)
+
+
         event.input.value = ""
         self.query_one("#main", Static).refresh() # I have a feeling I'll need to
         # refactor this later to fix stuttering/flickering
