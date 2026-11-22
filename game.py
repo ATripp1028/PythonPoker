@@ -1,36 +1,42 @@
 from random import shuffle
 
-from rich.layout import Layout
-from rich.panel import Panel
+from textual.containers import Horizontal, Vertical
+from textual.reactive import reactive
 from textual.widget import Widget
 
 from card import Card
 from constants import HAND_SIZE, RANKS, SUITS, GameStage
 from player import Player
+from sidebar import Sidebar
 
 
 class Game(Widget):
+    DEFAULT_CSS = """
+    Player      { height: 1fr }
+    #players    { width: 3fr }
+    #sidebar    { width: 1fr }
+    Game        { height: 1fr }
+    """
+
+    pot = reactive(0)
+    game_stage = reactive(GameStage.BETTING_1)
+
     def __init__(self):
         super().__init__()
         self.deck: list[Card] = []
-        self.dealer: Player = Player()
-        self.player: Player = Player(True)
-        self.running: bool = True
-        self.game_stage: GameStage = GameStage.BETTING_1
-        self.pot: int = 0
+        self.dealer: Player = Player("dealer")
+        self.player: Player = Player("player", True)
 
-    def render(self):
-        layout = Layout()
-        layout.split_row(
-            Layout(name="Players", ratio=3),
-            Panel(f"Pot: {self.pot}")
+    def compose(self):
+        yield Horizontal(
+            Vertical(
+                self.dealer,
+                self.player,
+                id="players"
+            ),
+            Sidebar("sidebar"),
+            id="game"
         )
-        layout["Players"].split(
-            Layout(Panel(self.dealer.hand), name="Dealer"),
-            Layout(Panel(self.player.hand), name="Player")
-        )
-
-        return layout
 
     def build_deck(self):
         for suit in SUITS:

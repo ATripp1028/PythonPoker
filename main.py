@@ -7,8 +7,6 @@ from game import Game
 class PyPoker(App):
     CSS = """
     Screen  { background: black; }
-    #header { height: 3; }
-    #main   { height: 1fr; }
     """
     BINDINGS = [('ctrl+q', "quit", "Quit")]
 
