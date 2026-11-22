@@ -2,14 +2,16 @@ from random import shuffle
 
 from rich.layout import Layout
 from rich.panel import Panel
+from textual.widget import Widget
 
 from card import Card
 from constants import HAND_SIZE, RANKS, SUITS, GameStage
 from player import Player
 
 
-class Game(object):
+class Game(Widget):
     def __init__(self):
+        super().__init__()
         self.deck: list[Card] = []
         self.dealer: Player = Player()
         self.player: Player = Player(True)
@@ -17,17 +19,18 @@ class Game(object):
         self.game_stage: GameStage = GameStage.BETTING_1
         self.pot: int = 0
 
-    def __rich__(self):
+    def render(self):
         layout = Layout()
-        layout.split(
+        layout.split_row(
+            Layout(name="Players", ratio=3),
+            Panel(f"Pot: {self.pot}")
+        )
+        layout["Players"].split(
             Layout(Panel(self.dealer.hand), name="Dealer"),
             Layout(Panel(self.player.hand), name="Player")
         )
 
         return layout
-
-    def handle_q_press(self):
-        self.running = False
 
     def build_deck(self):
         for suit in SUITS:
@@ -45,11 +48,3 @@ class Game(object):
             self.dealer.hand.draw_card(deck.pop())
 
         return self.player.hand, self.dealer.hand
-
-    def run_game_loop(self) -> bool:
-        return True
-
-    def run_game(self):
-        while self.running:
-            if not self.run_game_loop():
-                return
