@@ -1,8 +1,8 @@
 from random import shuffle
 
-from card import Card
 from constants import HAND_SIZE, RANKS, SUITS, GameStage
-from player import Player
+from model.card import Card
+from model.player import Player
 
 
 class Game:

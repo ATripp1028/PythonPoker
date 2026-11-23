@@ -1,8 +1,8 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
 
-from game import Game
-from table import Table
+from layout.table import Table
+from model.game import Game
 
 
 class PyPoker(App):

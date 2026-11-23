@@ -1,4 +1,4 @@
-from hand import Hand
+from model.hand import Hand
 
 
 class Player:

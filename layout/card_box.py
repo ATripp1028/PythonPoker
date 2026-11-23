@@ -2,8 +2,8 @@ from rich import box
 from rich.panel import Panel
 from rich.text import Text
 
-from card import Card
 from constants import SUIT_GLYPHS, SUIT_PALETTES
+from model.card import Card
 
 
 class CardBox:

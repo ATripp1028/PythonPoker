@@ -6,9 +6,9 @@ from rich.text import Text
 from textual.app import RenderResult
 from textual.widget import Widget
 
-from card import Card
-from card_box import CardBox
-from player import Player
+from layout.card_box import CardBox
+from model.card import Card
+from model.player import Player
 
 
 class PlayerPanel(Widget):

@@ -1,11 +1,10 @@
 from textual.containers import Horizontal, Vertical
-from textual.reactive import reactive
 from textual.widget import Widget
 
-from game import Game
-from player import Player
-from player_panel import PlayerPanel
-from sidebar import Sidebar
+from layout.player_panel import PlayerPanel
+from layout.sidebar import Sidebar
+from model.game import Game
+from model.player import Player
 
 
 class Table(Widget):
