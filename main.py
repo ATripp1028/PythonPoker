@@ -2,6 +2,7 @@ from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header
 
 from game import Game
+from table import Table
 
 
 class PyPoker(App):
@@ -15,11 +16,11 @@ class PyPoker(App):
         self.game: Game = Game()
         deck = self.game.build_deck()
         self.game.shuffle_deck()
-        self.game.deal_cards(deck)
+        self.game.deal_cards()
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield self.game
+        yield Table(self.game)
         yield Footer()
 
 if __name__ == "__main__":
