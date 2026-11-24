@@ -6,23 +6,25 @@ SUIT_GLYPHS = {
     "Spades": "\u2660",
     "Hearts": "\u2665",
     "Diamonds": "\u2666",
-    "Clubs": "\u2663"
+    "Clubs": "\u2663",
 }
 SUIT_PALETTES = {
     "classic": {
         "Spades": "white",
         "Hearts": "red3",
         "Diamonds": "red3",
-        "Clubs": "white"
+        "Clubs": "white",
     },
     "four_color": {
         "Spades": "black",
         "Hearts": "red3",
         "Diamonds": "dark_orange3",
-        "Clubs": "dodger_blue2"
-    }
+        "Clubs": "dodger_blue2",
+    },
 }
 HAND_SIZE = 5
+
+
 class GameStage(Enum):
     BETTING_1 = 1
     DISCARD = 2

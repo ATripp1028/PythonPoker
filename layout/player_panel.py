@@ -23,4 +23,4 @@ class PlayerPanel(Widget):
             label = Text(f"[{i + 1}]", "dim")
             slots.append(Group(CardBox(card), Align.center(label, width=7)))
 
-        return Panel(Columns(slots, padding=(0,1)))
+        return Panel(Columns(slots, padding=(0, 1)))

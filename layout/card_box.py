@@ -18,14 +18,12 @@ class CardBox:
         body.append(f"{short_rank}\n\n", style=color)
         body.append(f"   {suit_symbol}\n\n", style=color)
         body.append(
-            f"     {'' if short_rank == '10' else ' '}{short_rank}",
-            style=color
+            f"     {'' if short_rank == '10' else ' '}{short_rank}", style=color
         )
-        return Panel(body, box=box.ROUNDED, width=9, padding=0,
-            border_style="white")
+        return Panel(body, box=box.ROUNDED, width=9, padding=0, border_style="white")
 
     def get_short_rank(self) -> str:
-        match (self.card.rank):
+        match self.card.rank:
             case "Ace":
                 return "A"
             case "King":

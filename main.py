@@ -9,7 +9,7 @@ class PyPoker(App):
     CSS = """
     Screen  { background: black; }
     """
-    BINDINGS = [('ctrl+q', "quit", "Quit")]
+    BINDINGS = [("ctrl+q", "quit", "Quit")]
 
     def __init__(self):
         super().__init__()
@@ -22,6 +22,7 @@ class PyPoker(App):
         yield Header()
         yield Table(self.game)
         yield Footer()
+
 
 if __name__ == "__main__":
     PyPoker().run()

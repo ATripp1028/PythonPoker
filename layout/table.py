@@ -14,6 +14,7 @@ class Table(Widget):
     #players        { width: 3fr }
     #sidebar        { width: 1fr }
     """
+
     def __init__(self, game: Game):
         super().__init__()
         self.game: Game = game
@@ -25,8 +26,8 @@ class Table(Widget):
             Vertical(
                 PlayerPanel(self.dealer, "dealer"),
                 PlayerPanel(player=self.player, id="player"),
-                id="players"
+                id="players",
             ),
             Sidebar("sidebar"),
-            id="game"
+            id="game",
         )
