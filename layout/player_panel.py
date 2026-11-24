@@ -16,11 +16,18 @@ class PlayerPanel(Widget):
         super().__init__(id=id)
         self.player: Player = player
         self.cards: list[Card] = player.hand.cards
+        self.is_human: bool = player.is_human
 
     def render(self) -> RenderResult:
         slots: list[Group] = []
         for i, card in enumerate(self.cards):
-            label = Text(f"[{i + 1}]", "dim")
+            label = Text(f"[{i + 1}]", "dim white")
             slots.append(Group(CardBox(card), Align.center(label, width=7)))
 
-        return Panel(Columns(slots, padding=(0, 1)))
+        return Panel(
+            Align.center(
+                Columns(slots, padding=(0, 1))
+            ),
+            title="You" if self.is_human else "Dealer",
+            style="green" if self.is_human else "red"
+        )
