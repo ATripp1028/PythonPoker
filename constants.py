@@ -11,15 +11,15 @@ SUIT_GLYPHS = {
 SUIT_PALETTES = {
     "classic": {
         "Spades": "white",
-        "Hearts": "ansi_bright_red",
-        "Diamonds": "ansi_bright_red",
+        "Hearts": "red",
+        "Diamonds": "red",
         "Clubs": "white",
     },
     "four_color": {
         "Spades": "white",
-        "Hearts": "ansi_bright_red",
-        "Diamonds": "darkorange",
-        "Clubs": "dodgerblue",
+        "Hearts": "red",
+        "Diamonds": "orange",
+        "Clubs": "blue",
     },
 }
 HAND_SIZE = 5
