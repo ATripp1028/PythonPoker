@@ -9,10 +9,12 @@ from model.player import Player
 
 class Table(Widget):
     DEFAULT_CSS = """
-    PlayerPanel     { height: 1fr }
+    PlayerPanel     { height: 1fr; border: round; border-title-align: center }
     #game           { height: 1fr }
     #players        { width: 3fr }
-    #sidebar        { width: 1fr }
+    #dealer         { border: round red }
+    #you            { border: round green }
+    #sidebar        { width: 1fr; border: round white }
     """
 
     def __init__(self, game: Game):
@@ -22,12 +24,8 @@ class Table(Widget):
         self.player: Player = game.player
 
     def compose(self):
-        yield Horizontal(
-            Vertical(
-                PlayerPanel(self.dealer, "dealer"),
-                PlayerPanel(player=self.player, id="player"),
-                id="players",
-            ),
-            Sidebar("sidebar"),
-            id="game",
-        )
+        with Horizontal(id="game"):
+            with Vertical(id="players"):
+                yield PlayerPanel(player=self.dealer, id="dealer", title="Dealer")
+                yield PlayerPanel(player=self.player, id="you", title="You")
+            yield Sidebar("sidebar")

@@ -1,4 +1,3 @@
-from rich.panel import Panel
 from rich.text import Text
 from textual.app import RenderResult
 from textual.widget import Widget
@@ -11,4 +10,4 @@ class Sidebar(Widget):
     def render(self) -> RenderResult:
         text = Text("Test")
 
-        return Panel(text)
+        return text
