@@ -1,21 +1,14 @@
-from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
-from textual.widgets import Static
+from textual.widgets import Input
 
-from layout.card_box import CardBox
+from layout.card_row import CardRow
 from model.card import Card
 from model.player import Player
 
 
 class PlayerPanel(Widget):
     DEFAULT_CSS = """
-    CardBox                 { width: auto; height: auto }
-    #cards_and_numbers      { align: center top }
-    .card-slot {
-        width: auto;
-        margin-right: 1
-    }
-    .card-label             { text-align: center }
+    #cards_and_numbers  { align: center top }
     """
     def __init__(self, player: Player, id: str, title: str):
         super().__init__(id=id)
@@ -25,10 +18,5 @@ class PlayerPanel(Widget):
         self.border_title: str = title
 
     def compose(self):
-        with Horizontal(id="cards_and_numbers"):
-            for i, card in enumerate(self.cards):
-                with Vertical(id=f"card-{i}", classes="card-slot"):
-                    yield CardBox(card, f"card-{i}")
-                    yield Static(
-                        f"[{i + 1}]", id=f"card-{i}-label", classes="card-label"
-                    )
+        yield CardRow(self.player.hand.cards)
+        yield Input()
