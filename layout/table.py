@@ -17,6 +17,7 @@ class Table(Widget):
     #you            { border: round green }
     #sidebar        { width: 1fr; border: round white }
     .hidden         { visibility: hidden }
+    .error          { border: round red }
     """
 
     def __init__(self, game: Game):
@@ -39,7 +40,10 @@ class Table(Widget):
         if event.validation_result.is_valid:
             self.game.bet(self.player, int(event.value))
             self.hide_betting_input()
+            self.update()
 
     def hide_betting_input(self):
-        input = self.query_one("#bet", Input)
-        input.add_class("hidden")
+        self.query_one("#bet", Input).add_class("hidden")
+
+    def update(self):
+        self.query_one("#sidebar", Sidebar).refresh()

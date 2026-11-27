@@ -39,5 +39,4 @@ class PlayerPanel(Widget):
                             self.chips
                         )
                     ],
-                    name="Bet"
                 )
