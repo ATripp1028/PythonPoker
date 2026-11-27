@@ -13,7 +13,7 @@ class CardRow(Widget):
         width: auto;
         margin-right: 1
     }
-    .card-label             { text-align: center }
+    .card-label { text-align: center }
     """
     def __init__(self, cards: list[Card]):
         super().__init__()

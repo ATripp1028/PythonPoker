@@ -30,3 +30,8 @@ class Game:
             self.dealer.hand.draw_card(self.deck.pop())
 
         return self.player.hand, self.dealer.hand
+
+    def bet(self, player: Player, chips: int):
+        player.chips -= chips
+        player.bet_amount += chips
+        self.pot += chips

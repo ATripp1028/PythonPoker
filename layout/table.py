@@ -1,5 +1,6 @@
 from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
+from textual.widgets import Input
 
 from layout.player_panel import PlayerPanel
 from layout.sidebar import Sidebar
@@ -15,6 +16,7 @@ class Table(Widget):
     #dealer         { border: round red }
     #you            { border: round green }
     #sidebar        { width: 1fr; border: round white }
+    .hidden         { visibility: hidden }
     """
 
     def __init__(self, game: Game):
@@ -28,4 +30,16 @@ class Table(Widget):
             with Vertical(id="players"):
                 yield PlayerPanel(player=self.dealer, id="dealer", title="Dealer")
                 yield PlayerPanel(player=self.player, id="you", title="You")
-            yield Sidebar("sidebar")
+            yield Sidebar("sidebar", game=self.game)
+
+    def on_input_submitted(self, event: Input.Changed):
+        print(event)
+        if event.validation_result is None:
+            return
+        if event.validation_result.is_valid:
+            self.game.bet(self.player, int(event.value))
+            self.hide_betting_input()
+
+    def hide_betting_input(self):
+        input = self.query_one("#bet", Input)
+        input.add_class("hidden")

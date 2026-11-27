@@ -23,7 +23,8 @@ SUIT_PALETTES = {
     },
 }
 HAND_SIZE = 5
-
+SMALL_BLIND = 10
+BIG_BLIND = 20
 
 class GameStage(Enum):
     BETTING_1 = 1
